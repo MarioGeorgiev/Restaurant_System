@@ -55,6 +55,8 @@ namespace Restourant.Data
 
         public DbSet<Restourant.Models.AddDrinkViewModel> AddDrinkViewModel { get; set; }
 
+        public DbSet<Restourant.Models.AddFoodViewModel> AddFoodViewModel { get; set; }
+
 
     }
 }
