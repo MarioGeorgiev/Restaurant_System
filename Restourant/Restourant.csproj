@@ -15,11 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Models\AddTableViewModel.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Models\Tables\" />
+    <None Include="Models\Tables\AddTableViewModel.cs" />
   </ItemGroup>
 
 </Project>

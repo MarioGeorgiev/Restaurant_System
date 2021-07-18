@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Restourant.Data.Migrations
 {
-    public partial class RestaurantInitial : Migration
+    public partial class RestourantInitial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -211,7 +211,8 @@ namespace Restourant.Data.Migrations
                 name: "Tables",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     NumberOfPeople = table.Column<int>(type: "int", nullable: false),
                     IsReserved = table.Column<bool>(type: "bit", nullable: false),
@@ -287,7 +288,7 @@ namespace Restourant.Data.Migrations
                 name: "TableDrinks",
                 columns: table => new
                 {
-                    TableId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TableId = table.Column<int>(type: "int", nullable: false),
                     DrinkId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     OrderTimes = table.Column<int>(type: "int", nullable: false)
                 },
@@ -313,7 +314,7 @@ namespace Restourant.Data.Migrations
                 columns: table => new
                 {
                     FoodId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    TableId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    TableId = table.Column<int>(type: "int", nullable: false),
                     OrderTimes = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

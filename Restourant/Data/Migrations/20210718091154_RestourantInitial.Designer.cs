@@ -10,8 +10,8 @@ using Restourant.Data;
 namespace Restourant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210713044819_RestaurantInitial")]
-    partial class RestaurantInitial
+    [Migration("20210718091154_RestourantInitial")]
+    partial class RestourantInitial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -288,8 +288,8 @@ namespace Restourant.Data.Migrations
                     b.Property<string>("DrinkId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("TableId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("TableId")
+                        .HasColumnType("int");
 
                     b.Property<int>("OrderTimes")
                         .HasColumnType("int");
@@ -306,8 +306,8 @@ namespace Restourant.Data.Migrations
                     b.Property<string>("FoodId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("TableId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("TableId")
+                        .HasColumnType("int");
 
                     b.Property<int>("OrderTimes")
                         .HasColumnType("int");
@@ -373,8 +373,10 @@ namespace Restourant.Data.Migrations
 
             modelBuilder.Entity("Restourant.Data.Tables.Table", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");

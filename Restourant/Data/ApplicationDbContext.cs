@@ -8,6 +8,7 @@ using Restourant.Data.Models.Sold;
 using Restourant.Data.Sold;
 using Restourant.Data.Tables;
 using Restourant.Data.User;
+using Restourant.Models;
 namespace Restourant.Data
 {
     public class ApplicationDbContext : IdentityDbContext
@@ -51,6 +52,8 @@ namespace Restourant.Data
 
             // modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(p => p.UserId);
         }
+
+        public DbSet<Restourant.Models.AddDrinkViewModel> AddDrinkViewModel { get; set; }
 
 
     }

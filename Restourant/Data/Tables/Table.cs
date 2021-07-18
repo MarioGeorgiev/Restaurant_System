@@ -10,7 +10,7 @@ namespace Restourant.Data.Tables
 {
     public class Table : ITable
     {
-        public string Id { get; init; } = Guid.NewGuid().ToString();
+        public int Id { get; init; }
         public int Capacity { get; init; }
         public int NumberOfPeople { get; init; }
         public bool IsReserved { get; init; }

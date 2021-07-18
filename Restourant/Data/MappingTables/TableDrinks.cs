@@ -7,7 +7,7 @@ namespace Restourant.Data.MappingTables
     {
         public Table Table { get; init; }
 
-        public string TableId { get; init; }
+        public int TableId { get; init; }
 
         public Drink Drink { get; init; }
 

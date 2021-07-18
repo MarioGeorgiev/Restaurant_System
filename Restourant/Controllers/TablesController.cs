@@ -35,7 +35,19 @@ namespace Restourant.Controllers
             this.data.Add(tableToAdd);
             this.data.SaveChanges();
 
-            return RedirectPermanent("/Tables/All");
+           return RedirectPermanent("/Tables/List");
+        }
+
+        public IActionResult List(ListTablesViewModel tables)
+        {
+            var tablesList = this.data.Tables.Select(t => new ListTablesViewModel
+            {
+                Id = t.Id,
+                Capacity = t.Capacity,
+                IsReserved = t.IsReserved
+            })
+             .ToList();
+            return View(tablesList);
         }
     }
 }

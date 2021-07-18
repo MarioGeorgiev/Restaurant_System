@@ -1,0 +1,51 @@
+﻿@model List<Restourant.Models.Tables.ListTablesViewModel>
+
+@{
+    ViewData["Title"] = "All Tables";
+    int counter = 0;
+    bool isEndOfTables = false;
+}
+
+
+<div class="row mb-auto">
+    <table>
+        @for (int i = 0; i < Model.Count(); i++)
+        {
+            <tr>
+
+                @for (int j = 0; j < 6; j++)
+                {
+                    <td>
+                        <a asp-controller="Tables" asp-action="Details" asp-route-id="@Model[counter].Id" class="btn btn-primary">
+
+                            <div class="col-md-4">
+                                <div class="card-text text-left">
+                                    <h1 class="card-title text-left">@Model[counter].Id</h1>
+                                    <p class="text-center">Capacity: @Model[counter].Capacity</p>
+                                </div>
+                                <br />
+
+                            </div>
+                        </a>
+
+                        <span class="invisible">......</span>
+                        @{counter++;}
+                        @if (counter >= Model.Count)
+                        {
+                            isEndOfTables = true;
+                            break;
+                        }
+
+                    </td>
+                }
+
+            </tr>            
+            @if (isEndOfTables)
+            {
+                break;
+            }
+
+
+        }
+    </table>
+</div>
