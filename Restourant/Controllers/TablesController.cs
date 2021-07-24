@@ -2,10 +2,8 @@
 using Restourant.Data;
 using Restourant.Data.Tables;
 using Restourant.Models.Tables;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Restourant.Controllers
 {
@@ -48,6 +46,12 @@ namespace Restourant.Controllers
             })
              .ToList();
             return View(tablesList);
+        }
+
+        public IActionResult Orders() 
+        {
+
+            return View();
         }
     }
 }
