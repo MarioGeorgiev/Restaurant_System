@@ -1,9 +1,5 @@
 ﻿using Restourant.Data.Drinks.Contracts;
-using Restourant.Data.MappingTables;
-using Restourant.Data.Models.Sold;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
 namespace Restourant.Data.Drinks
 {

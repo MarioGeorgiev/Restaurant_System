@@ -11,7 +11,7 @@ using Restourant.Data.User;
 using Restourant.Models;
 namespace Restourant.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<TableDrinks> TableDrinks { get; set; }
         public DbSet<TableFoods> TableFoods { get; set; }
@@ -50,7 +50,9 @@ namespace Restourant.Data
                 .HasKey(tf => new { tf.FoodId, tf.TableId });
             base.OnModelCreating(modelBuilder);
 
-            // modelBuilder.Entity<IdentityUserLogin<string>>().HasKey(p => p.UserId);
+            modelBuilder.Entity<ApplicationUser>()
+        .HasIndex(u => u.UserName)
+        .IsUnique();
         }
 
         public DbSet<Restourant.Models.AddDrinkViewModel> AddDrinkViewModel { get; set; }

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Restourant.Data.Models.Sold;
 using Restourant.Data.Sold;
 using Restourant.Data.Tables;
@@ -26,6 +27,7 @@ namespace Restourant.Data.User
 
         public bool IsDeleted { get; set; }
 
+        public override string UserName { get; set; }
         public DateTime? DeletedOn { get; set; }
 
         public IEnumerable<Table> Tables { get; set; }
