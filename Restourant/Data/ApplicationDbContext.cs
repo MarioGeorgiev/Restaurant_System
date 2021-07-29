@@ -55,9 +55,9 @@ namespace Restourant.Data
         .IsUnique();
         }
 
-        public DbSet<Restourant.Models.AddDrinkViewModel> AddDrinkViewModel { get; set; }
+        public DbSet<Restourant.Models.DrinkViewModel> AddDrinkViewModel { get; set; }
 
-        public DbSet<Restourant.Models.AddFoodViewModel> AddFoodViewModel { get; set; }
+        public DbSet<Restourant.Models.FoodViewModel> AddFoodViewModel { get; set; }
 
 
     }

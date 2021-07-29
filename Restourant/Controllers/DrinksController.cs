@@ -2,6 +2,7 @@
 using Restourant.Data;
 using Restourant.Data.Drinks;
 using Restourant.Models;
+using System.Linq;
 
 namespace Restourant.Controllers
 {
@@ -18,7 +19,7 @@ namespace Restourant.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(AddDrinkViewModel drink)
+        public IActionResult Add(DrinkViewModel drink)
         {
             var drinkToAdd = new Drink()
             {
@@ -29,7 +30,20 @@ namespace Restourant.Controllers
             };
             this.data.Add(drinkToAdd);
             this.data.SaveChanges();
-            return RedirectPermanent("/Tables/List");
+            return RedirectPermanent("/Drinks/List");
+        }
+
+        public IActionResult List()
+        {
+            var drinks = this.data.Drinks.Select(d => new DrinkViewModel
+            {
+                Name = d.Name,
+                Brand = d.Brand,
+                Price = d.Price,
+                ServingSize = d.ServingSize
+            })
+             .ToList();
+            return View(drinks);
         }
     }
 }

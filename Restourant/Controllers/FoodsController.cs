@@ -16,23 +16,35 @@ namespace Restourant.Controllers
 
         public FoodsController(ApplicationDbContext data)
             => this.data = data;
-        public IActionResult Add() 
+        public IActionResult Add()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Add(AddFoodViewModel food)
+        public IActionResult Add(FoodViewModel food)
         {
             var drinkToAdd = new Food()
             {
-                Name = food.Name,               
+                Name = food.Name,
                 Price = food.Price,
                 ServingSize = food.ServingSize
             };
             this.data.Add(drinkToAdd);
             this.data.SaveChanges();
-            return RedirectPermanent("/Tables/List");
+            return RedirectPermanent("/Foods/List");
+        }
+
+        public IActionResult List()
+        {
+            var foods = this.data.Foods.Select(d => new FoodViewModel
+            {
+                Name = d.Name,
+                Price = d.Price,
+                ServingSize = d.ServingSize
+            })
+            .ToList();
+            return View(foods);
         }
     }
 }
