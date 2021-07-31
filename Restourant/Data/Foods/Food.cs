@@ -9,8 +9,8 @@ namespace Restourant.Data.Foods
     public class Food : IFood
     {
         public string Id { get; init; } = Guid.NewGuid().ToString();
-        public string Name { get; init; }
-        public int ServingSize { get; init; }
-        public decimal Price { get; init; }
+        public string Name { get; set; }
+        public int ServingSize { get; set; }
+        public decimal Price { get; set; }
     }
 }

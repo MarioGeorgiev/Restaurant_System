@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Restourant.Data;
 using Restourant.Data.Tables;
 using Restourant.Models.Tables;
@@ -17,12 +18,12 @@ namespace Restourant.Controllers
         {
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         public IActionResult Add()
         {
             return View();
         }
-
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public IActionResult Add(AddTableViewModel table)
         {
@@ -35,7 +36,7 @@ namespace Restourant.Controllers
 
            return RedirectPermanent("/Tables/List");
         }
-
+        [Authorize]
         public IActionResult List(ListTablesViewModel tables)
         {
             var tablesList = this.data.Tables.Select(t => new ListTablesViewModel
@@ -47,7 +48,7 @@ namespace Restourant.Controllers
              .ToList();
             return View(tablesList);
         }
-
+        [Authorize]
         public IActionResult Orders() 
         {
 

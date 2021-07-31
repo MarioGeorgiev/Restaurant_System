@@ -408,7 +408,7 @@ namespace Restourant.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Restourant.Models.AddDrinkViewModel", b =>
+            modelBuilder.Entity("Restourant.Models.DrinkViewModel", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -430,7 +430,7 @@ namespace Restourant.Data.Migrations
                     b.ToTable("AddDrinkViewModel");
                 });
 
-            modelBuilder.Entity("Restourant.Models.AddFoodViewModel", b =>
+            modelBuilder.Entity("Restourant.Models.FoodViewModel", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
