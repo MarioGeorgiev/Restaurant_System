@@ -15,6 +15,9 @@ namespace Restourant.Data.Tables
         public int NumberOfPeople { get; set; }
         public bool IsReserved { get; set; }
         public decimal Bill { get; set; }
+		
+		public ICollection<TableFoods> FoodOrders { get; set; }
+        public ICollection<TableDrinks> DrinkOrders { get; set; }
 
     }
 

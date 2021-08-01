@@ -1,0 +1,34 @@
+﻿<td>
+    <p style="text-align:center">
+        <div class="btn-group-vertical" role="group">
+            <button type="button" class="btn btn-secondary" style="background-color:blue" id="Food-button" value='Foods'>Food</button>
+            <button type="button" class="btn btn-secondary" id="Drinks-button" value='Drinks'>Drinks</button>
+        </div>
+    </p>
+</td>
+<td>
+    <div align="right">
+        <p id="demo"></p>
+    </div>
+</td>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+
+    $(':button').click(function () {
+        let text = "<ul>";
+        console.log(this.value);
+
+        $.get('/api/' + this.value, (data) => {
+
+            for (let i = 0; i < data.length; i++) {
+
+                text += '<a class="btn btn-warning" href="?' + "productId=" + data[i].id + '&type=' + this.value + '">' + data[i].name + '-' + data[i].price + '</a>';
+            }
+            text += "</ul>";
+            document.getElementById("demo").innerHTML = text;
+        });
+        document.getElementById("demo").innerHTML = text;
+
+    });
+
+</script>

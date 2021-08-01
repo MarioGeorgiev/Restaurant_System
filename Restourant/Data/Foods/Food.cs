@@ -12,5 +12,10 @@ namespace Restourant.Data.Foods
         public string Name { get; set; }
         public int ServingSize { get; set; }
         public decimal Price { get; set; }
+		
+		public ICollection<FoodSold> FoodsSold { get; set; }
+
+        
+        public ICollection<TableFoods> TableFoods { get; set; }
     }
 }

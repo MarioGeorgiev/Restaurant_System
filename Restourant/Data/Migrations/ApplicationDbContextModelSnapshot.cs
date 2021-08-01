@@ -515,13 +515,13 @@ namespace Restourant.Data.Migrations
             modelBuilder.Entity("Restourant.Data.MappingTables.TableDrinks", b =>
                 {
                     b.HasOne("Restourant.Data.Drinks.Drink", "Drink")
-                        .WithMany()
+                        .WithMany("TableDrinks")
                         .HasForeignKey("DrinkId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Restourant.Data.Tables.Table", "Table")
-                        .WithMany()
+                        .WithMany("DrinkOrders")
                         .HasForeignKey("TableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -534,13 +534,13 @@ namespace Restourant.Data.Migrations
             modelBuilder.Entity("Restourant.Data.MappingTables.TableFoods", b =>
                 {
                     b.HasOne("Restourant.Data.Foods.Food", "Food")
-                        .WithMany()
+                        .WithMany("TableFoods")
                         .HasForeignKey("FoodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Restourant.Data.Tables.Table", "Table")
-                        .WithMany()
+                        .WithMany("FoodOrders")
                         .HasForeignKey("TableId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -557,7 +557,7 @@ namespace Restourant.Data.Migrations
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Restourant.Data.Drinks.Drink", "Drink")
-                        .WithMany()
+                        .WithMany("DrinkssSold")
                         .HasForeignKey("DrinkId");
 
                     b.Navigation("Drink");
@@ -570,7 +570,7 @@ namespace Restourant.Data.Migrations
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Restourant.Data.Foods.Food", "Food")
-                        .WithMany()
+                        .WithMany("FoodsSold")
                         .HasForeignKey("FoodId");
 
                     b.Navigation("Food");
@@ -581,6 +581,27 @@ namespace Restourant.Data.Migrations
                     b.HasOne("Restourant.Data.User.ApplicationUser", null)
                         .WithMany("Tables")
                         .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("Restourant.Data.Drinks.Drink", b =>
+                {
+                    b.Navigation("DrinkssSold");
+
+                    b.Navigation("TableDrinks");
+                });
+
+            modelBuilder.Entity("Restourant.Data.Foods.Food", b =>
+                {
+                    b.Navigation("FoodsSold");
+
+                    b.Navigation("TableFoods");
+                });
+
+            modelBuilder.Entity("Restourant.Data.Tables.Table", b =>
+                {
+                    b.Navigation("DrinkOrders");
+
+                    b.Navigation("FoodOrders");
                 });
 
             modelBuilder.Entity("Restourant.Data.User.ApplicationUser", b =>

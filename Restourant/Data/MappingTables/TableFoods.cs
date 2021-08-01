@@ -7,14 +7,14 @@ namespace Restourant.Data.MappingTables
 {
     public class TableFoods
     {
-        public Food Food { get; init; }
+        public Food Food { get; set; }
 
-        public string FoodId { get; init; }
+        public string FoodId { get; set; }
 
-        public Table Table { get; init; }
+        public Table Table { get; set; }
 
-        public int TableId { get; init; }
+        public int TableId { get; set; }
 
-        public int OrderTimes { get; init; }
+        public int OrderTimes { get; set; }
     }
 }
