@@ -14,12 +14,12 @@
             <div class="container">
                 @if (!User.Identity.IsAuthenticated)
                 {
-                              <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Restourant</a>
+                              <a class="navbar-brand" asp-controller="Home" asp-action="Index">Restourant</a>
                 }
-                        else
-                        {
-                            <a class="navbar-brand" asp-area="" asp-controller="Tables" asp-action="List">Restourant</a>
-                        }
+                else
+                {
+                            <a class="navbar-brand" asp-controller="Tables" asp-action="List">Restourant</a>
+                }
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">

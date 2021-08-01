@@ -11,10 +11,10 @@ namespace Restourant.Data.Tables
     public class Table : ITable
     {
         public int Id { get; init; }
-        public int Capacity { get; init; }
-        public int NumberOfPeople { get; init; }
-        public bool IsReserved { get; init; }
-        public decimal Bill { get; init; }
+        public int Capacity { get; set; }
+        public int NumberOfPeople { get; set; }
+        public bool IsReserved { get; set; }
+        public decimal Bill { get; set; }
 
     }
 

@@ -20,6 +20,7 @@ namespace Restourant.Controllers.Api
         {
             var drinks = this.data.Drinks.Select(d => new DrinksApiModel() 
             { 
+                Id = d.Id,
                 Name= d.Name,
                 Brand = d.Brand,
                 Price =d.Price,

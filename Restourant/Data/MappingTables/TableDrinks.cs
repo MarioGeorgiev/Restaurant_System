@@ -5,15 +5,15 @@ namespace Restourant.Data.MappingTables
 {
     public class TableDrinks
     {
-        public Table Table { get; init; }
+        public Table Table { get; set; }
 
-        public int TableId { get; init; }
+        public int TableId { get; set; }
 
-        public Drink Drink { get; init; }
+        public Drink Drink { get; set; }
 
-        public string DrinkId { get; init; }
+        public string DrinkId { get; set; }
 
-        public int OrderTimes { get; init; }
+        public int OrderTimes { get; set; }
 
 
     }

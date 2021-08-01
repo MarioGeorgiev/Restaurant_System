@@ -7,6 +7,7 @@ namespace Restourant.Models.Api.Foods
 {
     public class FoodsApiModel
     {
+        public string Id { get; set; }
         public string Name { get; init; }
         public int ServingSize { get; init; }
         public decimal Price { get; init; }

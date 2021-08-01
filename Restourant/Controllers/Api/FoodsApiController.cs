@@ -21,6 +21,7 @@ namespace Restourant.Controllers.Api
         {
             var foods = this.data.Foods.Select(f=>new FoodsApiModel() 
             { 
+                Id = f.Id,
                 Name=f.Name,
                 Price=f.Price,
                 ServingSize = f.ServingSize

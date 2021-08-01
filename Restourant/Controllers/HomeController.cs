@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Restourant.Models;
 using System.Diagnostics;
 
@@ -9,7 +8,16 @@ namespace Restourant.Controllers
     {
         public IActionResult Index()
         {
-            return RedirectPermanent("/Identity/Account/Login");
+            System.Console.WriteLine(User.Identity.IsAuthenticated);
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectPermanent("Tables/List");
+            }
+            else
+            {
+                return RedirectPermanent("/Identity/Account/Login");
+            }
+            
         }
 
         public IActionResult Privacy()
