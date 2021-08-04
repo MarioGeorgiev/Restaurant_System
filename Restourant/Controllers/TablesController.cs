@@ -114,7 +114,7 @@ namespace Restourant.Controllers
                     }
 
 
-                    return View(tableItems);
+                    return RedirectToAction("Orders",tableItems.Id);
                 }
             }
         }
@@ -147,17 +147,18 @@ namespace Restourant.Controllers
                         tableDrink.OrderTimes = 1;
                         data.TableDrinks.Add(tableDrink);
                         data.SaveChanges();
-                        return View(tableItems);
                     }
                     else
                     {
                         orderSameDrinkMoreThenOneTime.OrderTimes++;
                         table.Bill += drink.Price;
                         data.SaveChanges();
-                        return View(tableItems);
+
                     }
+                    return RedirectToAction("Orders", tableItems.Id);
                 }
             }
+            
         }
     }
 }

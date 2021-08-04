@@ -1,14 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Restourant.Data;
-using Restourant.Models.Api.Drinks;
-using Restourant.Models.Api.Foods;
 using Restourant.Models.Api.TableOrders;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Restourant.Controllers.Api
 {
@@ -30,26 +25,29 @@ namespace Restourant.Controllers.Api
                 .Include(x => x.DrinkOrders).ThenInclude(x => x.Drink)
                 .FirstOrDefault(x => x.Id == id);
 
-            var drinks = table.DrinkOrders.Select(d => new DrinksApiModel()
+            var drinks = table.DrinkOrders.Select(d => new DrinksOnTableApiModel()
             {
                         Id = d.Drink.Id,
                         Name = d.Drink.Name,
                         ServingSize = d.Drink.ServingSize,
                         Brand = d.Drink.Brand,
-                        Price = d.Drink.Price
+                        Price = d.Drink.Price,
+                        OrderTimes = d.OrderTimes
+                        
             });
-
-            var foods = table.FoodOrders.Select(f => new FoodsApiModel()
+            
+            var foods = table.FoodOrders.Select(f => new FoodsOnTableApiModel()
             {
                 Id = f.Food.Id,
                 Name = f.Food.Name,
                 ServingSize = f.Food.ServingSize,               
-                Price = f.Food.Price
+                Price = f.Food.Price,
+                OrderTimes = f.OrderTimes
 
             });
 
             decimal bill = table.Bill;
-
+            
             TableOrdersApiModel orders= new TableOrdersApiModel()
             {
                 DrinksOrdered = drinks,
