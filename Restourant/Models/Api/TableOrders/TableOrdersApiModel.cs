@@ -11,6 +11,8 @@ namespace Restourant.Models.Api.TableOrders
 
         public IEnumerable<FoodsApiModel> FoodsOrdered { get; set; }
 
+        public int DrinksOrderedCount { get; set; }
+        public int FoodsOrderedCount { get; set; }
         public decimal Bill { get; set; }
     }
 }

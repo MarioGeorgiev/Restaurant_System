@@ -6,11 +6,36 @@
 <table>
     <tr sstyle="text-align:left">
         <th style="color:grey">
-            Name
-        </th>
-        <th style="color:grey">
-           Price
-        </th>
+            Name    Price   
+            <p id="orders"></p>
+        </th>      
+
         <partial name="_OrdersPartial" />
     </tr>
 </table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+    let ordersText = '';
+
+    $.get('/api/table?id=' + @Model.Id, (data) => {
+
+        for (let i = 0; i < data.drinksOrdered.length; i++) {
+
+            ordersText += '<li>' + data.drinksOrdered[i].name + '   ' + data.drinksOrdered[i].price + '</li>';
+            + '</li>';
+        }       
+        for (let i = 0; i < data.foodsOrdered.length; i++) {
+
+            ordersText += '<li>' + data.foodsOrdered[i].name + '   ' + data.foodsOrdered[i].price + '</li>';
+            + '</li>';
+        }
+        
+        document.getElementById("orders").innerHTML = ordersText;
+
+        });
+    document.getElementById("orders").innerHTML = ordersText;
+
+
+
+</script>
