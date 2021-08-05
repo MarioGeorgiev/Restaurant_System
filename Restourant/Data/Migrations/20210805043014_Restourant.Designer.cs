@@ -10,8 +10,8 @@ using Restourant.Data;
 namespace Restourant.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210801165137_RestaurantFix")]
-    partial class RestaurantFix
+    [Migration("20210805043014_Restourant")]
+    partial class Restourant
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -580,9 +580,11 @@ namespace Restourant.Data.Migrations
 
             modelBuilder.Entity("Restourant.Data.Tables.Table", b =>
                 {
-                    b.HasOne("Restourant.Data.User.ApplicationUser", null)
+                    b.HasOne("Restourant.Data.User.ApplicationUser", "ApplicationUser")
                         .WithMany("Tables")
                         .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Restourant.Data.Drinks.Drink", b =>

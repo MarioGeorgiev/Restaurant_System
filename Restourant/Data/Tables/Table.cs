@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Restourant.Data.MappingTables;
 using Restourant.Data.Tables.Contracts;
+using Restourant.Data.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,10 @@ namespace Restourant.Data.Tables
         public int NumberOfPeople { get; set; }
         public bool IsReserved { get; set; }
         public decimal Bill { get; set; }
-		
-		public ICollection<TableFoods> FoodOrders { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
+
+        public string ApplicationUserId { get; set; }
+        public ICollection<TableFoods> FoodOrders { get; set; }
         public ICollection<TableDrinks> DrinkOrders { get; set; }
 
     }

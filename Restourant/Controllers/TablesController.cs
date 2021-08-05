@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Restourant.Data;
 using Restourant.Data.Drinks;
 using Restourant.Data.Foods;
@@ -8,8 +7,8 @@ using Restourant.Data.Foods.Contracts;
 using Restourant.Data.MappingTables;
 using Restourant.Data.Tables;
 using Restourant.Data.Tables.Contracts;
+using Restourant.Infrastructure;
 using Restourant.Models.Tables;
-using System;
 using System.Linq;
 
 
@@ -50,7 +49,8 @@ namespace Restourant.Controllers
             {
                 Id = t.Id,
                 Capacity = t.Capacity,
-                IsReserved = t.IsReserved
+                IsReserved = t.IsReserved//,
+              //  UserId = t.ApplicationUserId
             })
              .ToList();
             return View(tablesList);
@@ -59,7 +59,11 @@ namespace Restourant.Controllers
         public IActionResult Orders(int id,string productId, string type)
         {
             var tableItems = new OrderTableViewModel() { Id = id };
-            System.Console.WriteLine($"{id}:{productId}:{type}");
+            var user = User.Identity.Name;
+            System.Console.WriteLine($"{user}");
+            var test = User.Id();
+            System.Console.WriteLine($"{test}");
+            System.Console.WriteLine($"{id}:{productId}:{type}:{user}");           
             if (productId == null)
             {
                 return View(tableItems);

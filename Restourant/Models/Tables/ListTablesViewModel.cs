@@ -11,5 +11,7 @@ namespace Restourant.Models.Tables
         public int Capacity { get; init; }
 
         public bool IsReserved { get; init; }
+
+        public string UserId { get; init; }
     }
 }

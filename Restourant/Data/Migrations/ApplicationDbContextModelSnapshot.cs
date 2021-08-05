@@ -578,9 +578,11 @@ namespace Restourant.Data.Migrations
 
             modelBuilder.Entity("Restourant.Data.Tables.Table", b =>
                 {
-                    b.HasOne("Restourant.Data.User.ApplicationUser", null)
+                    b.HasOne("Restourant.Data.User.ApplicationUser", "ApplicationUser")
                         .WithMany("Tables")
                         .HasForeignKey("ApplicationUserId");
+
+                    b.Navigation("ApplicationUser");
                 });
 
             modelBuilder.Entity("Restourant.Data.Drinks.Drink", b =>
