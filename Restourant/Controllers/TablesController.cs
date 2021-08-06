@@ -49,8 +49,8 @@ namespace Restourant.Controllers
             {
                 Id = t.Id,
                 Capacity = t.Capacity,
-                IsReserved = t.IsReserved//,
-              //  UserId = t.ApplicationUserId
+                IsReserved = t.IsReserved,     
+                UserId = t.ApplicationUserId
             })
              .ToList();
             return View(tablesList);
@@ -59,11 +59,12 @@ namespace Restourant.Controllers
         public IActionResult Orders(int id,string productId, string type)
         {
             var tableItems = new OrderTableViewModel() { Id = id };
-            var user = User.Identity.Name;
-            System.Console.WriteLine($"{user}");
-            var test = User.Id();
-            System.Console.WriteLine($"{test}");
-            System.Console.WriteLine($"{id}:{productId}:{type}:{user}");           
+            var table = data.Tables.FirstOrDefault(p => p.Id == id);
+            if (table.ApplicationUserId != User.Id() && table.ApplicationUserId!= null)
+            {
+                return Unauthorized();
+            }
+      
             if (productId == null)
             {
                 return View(tableItems);
@@ -85,7 +86,7 @@ namespace Restourant.Controllers
 
         private IActionResult AddFoodToTable(int id, string productId, OrderTableViewModel tableItems)
         {
-            ITable table = data.Tables.FirstOrDefault(p => p.Id == id);
+            var table = data.Tables.FirstOrDefault(p => p.Id == id);
             if (table == null)
             {
                 return BadRequest($"Could not find table with {id}");
@@ -103,6 +104,7 @@ namespace Restourant.Controllers
                     if (orderSameFoodMoreThenOneTime == null)
                     {
                         TableFoods tableFoods = new TableFoods();
+                        table.ApplicationUserId = User.Id();
                         tableFoods.Food = (Food)food;
                         tableFoods.Table = (Table)table;
                         table.Bill += food.Price;
@@ -142,6 +144,7 @@ namespace Restourant.Controllers
                     var orderSameDrinkMoreThenOneTime = data.TableDrinks.FirstOrDefault(p => p.TableId == table.Id && p.DrinkId == drink.Id);
                     if (orderSameDrinkMoreThenOneTime == null)
                     {
+                        table.ApplicationUserId = User.Id();
                         TableDrinks tableDrink = new TableDrinks
                         {
                             Drink = (Drink)drink,

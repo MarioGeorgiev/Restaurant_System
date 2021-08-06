@@ -1,4 +1,6 @@
 ﻿
+using Restourant.Data.User;
+
 namespace Restourant.Data.Tables.Contracts
 {
     public interface ITable
@@ -9,5 +11,8 @@ namespace Restourant.Data.Tables.Contracts
         bool IsReserved { get;  }
         decimal Bill { get; set; }
 
+        ApplicationUser ApplicationUser { get;  }
+
+        string ApplicationUserId { get;  }
     }
 }
