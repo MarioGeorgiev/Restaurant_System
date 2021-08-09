@@ -14,9 +14,10 @@
         <partial name="_OrdersPartial" />
     </tr>
 </table>
+<a class="btn btn-danger" asp-controller="Tables" asp-action="Clear" asp-route-id="@Model.Id">Clear Table</a>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
     let ordersText = '';
     let billText = '';
     $.get('/api/table?id=' + @Model.Id, (data) => {
@@ -28,14 +29,14 @@
 
             ordersText += '<li>' + data.drinksOrdered[i].name + '   ' + data.drinksOrdered[i].price + '   '+data.drinksOrdered[i].orderTimes + '</li>';
             + '</li>';
-        }       
+        }
         for (let i = 0; i < data.foodsOrdered.length; i++)
         {
 
             ordersText += '<li>' + data.foodsOrdered[i].name + '   ' + data.foodsOrdered[i].price + '   '+data.foodsOrdered[i].orderTimes + '</li>';
             + '</li>';
         }
-        
+
         document.getElementById("orders").innerHTML = ordersText;
 
         });
@@ -43,4 +44,4 @@
 
 
 
-</script>
+    </script>
