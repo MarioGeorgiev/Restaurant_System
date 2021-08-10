@@ -5,10 +5,14 @@ using Restourant.Data.Drinks;
 using Restourant.Data.Foods;
 using Restourant.Data.Foods.Contracts;
 using Restourant.Data.MappingTables;
+using Restourant.Data.Models.Sold;
+using Restourant.Data.Sold;
 using Restourant.Data.Tables;
 using Restourant.Data.Tables.Contracts;
 using Restourant.Infrastructure;
 using Restourant.Models.Tables;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 
@@ -60,7 +64,7 @@ namespace Restourant.Controllers
         {
             var tableItems = new OrderTableViewModel() { Id = id };
             var table = data.Tables.FirstOrDefault(p => p.Id == id);
-            if (table.ApplicationUserId != User.Id() && table.ApplicationUserId!= null)
+            if (table.ApplicationUserId != User.Id() && table.ApplicationUserId!= null && !User.IsAdmin())
             {
                 return Unauthorized();
             }
@@ -166,6 +170,75 @@ namespace Restourant.Controllers
                 }
             }
             
+        }
+        [HttpGet]
+        public IActionResult Clear(int id)
+        {
+
+            ITable table = data.Tables.FirstOrDefault(p => p.Id == id);            
+
+            table.Bill = 0;
+         
+            ICollection<TableFoods> tableFoods = data.TableFoods.Where(x => x.TableId == table.Id).ToList();
+            List<FoodSold> foodSoldAlready = new List<FoodSold>();
+            foreach (var food in tableFoods)
+            {
+                FoodSold check = data.FoodsSold.FirstOrDefault(x => x.FoodId == food.FoodId);
+                if (check == null)
+                {
+
+                    FoodSold foodsSold = new FoodSold()
+                    {
+                        Food = data.Foods.FirstOrDefault(x => x.Id == food.FoodId),
+                        DateSold = DateTime.Now,
+                        ApplicationUserId = table.ApplicationUserId,
+                        SoldTimes = 1
+                    };
+
+                    foodSoldAlready.Add(foodsSold);
+                }
+                else
+                {
+                    check.DateSold = DateTime.Now;
+                    check.SoldTimes++;
+                }
+
+            }
+
+            data.FoodsSold.AddRange(foodSoldAlready);
+            data.RemoveRange(tableFoods);
+
+            ICollection<TableDrinks> tableDrinks = data.TableDrinks.Where(x => x.TableId == table.Id).ToList();
+
+            List<DrinkSold> drinksSoldAlready = new List<DrinkSold>();
+            foreach (var drink in tableDrinks)
+            {
+                var check = data.DrinksSold.FirstOrDefault(x => x.DrinkId == drink.DrinkId);
+                if (check == null)
+                {
+                    DrinkSold drinksSold = new DrinkSold()
+                    {
+                        Drink = data.Drinks.FirstOrDefault(x => x.Id == drink.DrinkId),
+                        DateSold = DateTime.Now,
+                        ApplicationUserId = table.ApplicationUserId,
+                        SoldTime = 1
+
+                    };
+                    drinksSoldAlready.Add(drinksSold);
+                }
+                else
+                {
+                    check.DateSold = DateTime.Now;
+                    check.SoldTime++;
+                }
+
+            }
+            data.DrinksSold.AddRange(drinksSoldAlready);
+            data.RemoveRange(tableDrinks);
+
+            data.SaveChanges();
+
+            return RedirectToAction("List");
         }
     }
 }

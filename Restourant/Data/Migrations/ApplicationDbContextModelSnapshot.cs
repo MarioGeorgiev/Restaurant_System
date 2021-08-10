@@ -552,7 +552,7 @@ namespace Restourant.Data.Migrations
 
             modelBuilder.Entity("Restourant.Data.Models.Sold.DrinkSold", b =>
                 {
-                    b.HasOne("Restourant.Data.User.ApplicationUser", null)
+                    b.HasOne("Restourant.Data.User.ApplicationUser", "ApplicationUser")
                         .WithMany("DrinksSold")
                         .HasForeignKey("ApplicationUserId");
 
@@ -560,18 +560,22 @@ namespace Restourant.Data.Migrations
                         .WithMany("DrinkssSold")
                         .HasForeignKey("DrinkId");
 
+                    b.Navigation("ApplicationUser");
+
                     b.Navigation("Drink");
                 });
 
             modelBuilder.Entity("Restourant.Data.Sold.FoodSold", b =>
                 {
-                    b.HasOne("Restourant.Data.User.ApplicationUser", null)
+                    b.HasOne("Restourant.Data.User.ApplicationUser", "ApplicationUser")
                         .WithMany("FoodSold")
                         .HasForeignKey("ApplicationUserId");
 
                     b.HasOne("Restourant.Data.Foods.Food", "Food")
                         .WithMany("FoodsSold")
                         .HasForeignKey("FoodId");
+
+                    b.Navigation("ApplicationUser");
 
                     b.Navigation("Food");
                 });

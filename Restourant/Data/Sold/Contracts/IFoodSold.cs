@@ -1,4 +1,5 @@
 ﻿using Restourant.Data.Foods;
+using Restourant.Data.User;
 using System;
 
 namespace Restourant.Data.Sold.Contracts
@@ -8,8 +9,12 @@ namespace Restourant.Data.Sold.Contracts
         string Id { get; init; }
         Food Food { get; }
         string FoodId { get; }
-        DateTime DateSold { get; }
-        int SoldTimes { get; }
+        DateTime DateSold { get; set; }
+        int SoldTimes { get; set; }
+
+        ApplicationUser ApplicationUser { get; }
+
+        string ApplicationUserId { get; }
 
     }
 }

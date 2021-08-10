@@ -8,7 +8,7 @@ namespace Restourant.Data.Tables.Contracts
         int Id { get; init; }
         int Capacity { get; }
         int NumberOfPeople { get;  }
-        bool IsReserved { get;  }
+        bool IsReserved { get; set; }
         decimal Bill { get; set; }
 
         ApplicationUser ApplicationUser { get;  }
