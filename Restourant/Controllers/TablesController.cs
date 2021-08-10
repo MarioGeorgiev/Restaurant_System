@@ -178,6 +178,7 @@ namespace Restourant.Controllers
             ITable table = data.Tables.FirstOrDefault(p => p.Id == id);            
 
             table.Bill = 0;
+            
          
             ICollection<TableFoods> tableFoods = data.TableFoods.Where(x => x.TableId == table.Id).ToList();
             List<FoodSold> foodSoldAlready = new List<FoodSold>();
@@ -192,15 +193,30 @@ namespace Restourant.Controllers
                         Food = data.Foods.FirstOrDefault(x => x.Id == food.FoodId),
                         DateSold = DateTime.Now,
                         ApplicationUserId = table.ApplicationUserId,
-                        SoldTimes = 1
+                        SoldTimes = food.OrderTimes
                     };
 
                     foodSoldAlready.Add(foodsSold);
                 }
                 else
                 {
-                    check.DateSold = DateTime.Now;
-                    check.SoldTimes++;
+                    if (check.ApplicationUserId == User.Id())
+                    {
+                        check.DateSold = DateTime.Now;
+                        check.SoldTimes += food.OrderTimes;
+                    }
+                    else
+                    {
+                        FoodSold foodsSold = new FoodSold()
+                        {
+                            Food = data.Foods.FirstOrDefault(x => x.Id == food.FoodId),
+                            DateSold = DateTime.Now,
+                            ApplicationUserId = table.ApplicationUserId,
+                            SoldTimes = food.OrderTimes
+                        };
+                        foodSoldAlready.Add(foodsSold);
+                    }
+                    
                 }
 
             }
@@ -221,21 +237,36 @@ namespace Restourant.Controllers
                         Drink = data.Drinks.FirstOrDefault(x => x.Id == drink.DrinkId),
                         DateSold = DateTime.Now,
                         ApplicationUserId = table.ApplicationUserId,
-                        SoldTime = 1
+                        SoldTime = drink.OrderTimes
 
                     };
                     drinksSoldAlready.Add(drinksSold);
                 }
                 else
                 {
-                    check.DateSold = DateTime.Now;
-                    check.SoldTime++;
+                    if (check.ApplicationUserId == User.Id())
+                    {
+                        check.DateSold = DateTime.Now;
+                        check.SoldTime += drink.OrderTimes;
+                    }
+                    else
+                    {
+                        DrinkSold drinksSold = new DrinkSold()
+                        {
+                            Drink = data.Drinks.FirstOrDefault(x => x.Id == drink.DrinkId),
+                            DateSold = DateTime.Now,
+                            ApplicationUserId = table.ApplicationUserId,
+                            SoldTime = drink.OrderTimes
+
+                        };
+                        drinksSoldAlready.Add(drinksSold);
+                    }
                 }
 
             }
             data.DrinksSold.AddRange(drinksSoldAlready);
             data.RemoveRange(tableDrinks);
-
+            table.ApplicationUserId = null;
             data.SaveChanges();
 
             return RedirectToAction("List");

@@ -13,6 +13,6 @@ namespace Restourant.Data.Tables.Contracts
 
         ApplicationUser ApplicationUser { get;  }
 
-        string ApplicationUserId { get;  }
+        string ApplicationUserId { get; set; }
     }
 }
